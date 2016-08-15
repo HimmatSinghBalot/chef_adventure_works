@@ -6,7 +6,7 @@ powershell_script 'Install SQL Server' do
   code <<-EOH
   Mount-DiskImage -ImagePath #{full_path_iso_file}
   $driveLetter = (Get-DiskImage #{full_path_iso_file} | Get-Volume).DriveLetter
-  iex "$($driveLetter):\\setup.exe /CONFIGURATIONFILE=#{setup_ini_file} /IAcceptSQLServerLicenseTerms"
+  iex "$($driveLetter):\\setup.exe /CONFIGURATIONFILE=#{setup_ini_file} /IAcceptSQLServerLicenseTerms /SAPWD=!sql2014"
   Dismount-DiskImage -ImagePath #{full_path_iso_file}
   EOH
   not_if <<-EOH
