@@ -8,3 +8,4 @@ version '0.1.0'
 
 depends 'windows', '~> 1.44.0'
 depends 'iis', '~> 4.2.0'
+depends 'chef-client', '~> 5.0.0'

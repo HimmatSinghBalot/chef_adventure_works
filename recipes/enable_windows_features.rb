@@ -36,11 +36,10 @@ features = %w(
   AS-Web-Support
   AS-WAS-Support
   AS-HTTP-Activation
- PowerShellRoot
-PowerShell
-PowerShell-V2
-DSC-Service
-PowerShell-ISE 
+  PowerShellRoot
+  PowerShell
+  PowerShell-V2
+  PowerShell-ISE
 )
 
 # Then we install each feature

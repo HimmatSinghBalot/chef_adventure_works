@@ -2,6 +2,12 @@ full_path_iso_file = 'C:\Deploy\en_sql_server_2014_developer_edition_with_servic
 files_folder = File.expand_path('../files', File.dirname(__FILE__))
 setup_ini_file = "#{files_folder}/SQL_Server_Setup_Config.ini"
 
+reboot 'if_pending' do
+  action :reboot_now
+  reason 'There is a pending reboot.'
+  only_if { reboot_pending? }
+end
+
 powershell_script 'Install SQL Server' do
   code <<-EOH
   Mount-DiskImage -ImagePath #{full_path_iso_file}
@@ -15,8 +21,3 @@ powershell_script 'Install SQL Server' do
   notifies :reboot_now, 'reboot[if_pending]', :immediate
 end
 
-reboot 'if_pending' do
-  action :nothing
-  reason 'There is a pending reboot.'
-  only_if { reboot_pending? }
-end

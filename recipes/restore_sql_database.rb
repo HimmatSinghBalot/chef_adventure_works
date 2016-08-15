@@ -6,8 +6,14 @@ files_folder = File.expand_path('../files', File.dirname(__FILE__))
 sql_command = ::File.read("#{files_folder}/restore_database.sql")
 bak_file_path = 'C:\Deploy\AdventureWorks2012-Full Database Backup.bak'
 
-powershell_script 'Install SQL Server' do
+powershell_script 'Restore AdventureWorks database' do
   code <<-EOH
+If (!(Get-Module sqlps -ListAvailable -EA SilentlyContinue)) {
+    Import-Module "C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\PowerShell\\Modules\\SQLPS\\SQLPS.PSD1"
+}
+Else {
+    Import-Module sqlps
+}
 $query = @'
 #{sql_command}
 '@
