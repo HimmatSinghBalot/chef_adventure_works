@@ -20,4 +20,3 @@ powershell_script 'Install SQL Server' do
   EOH
   notifies :reboot_now, 'reboot[if_pending]', :immediate
 end
-
